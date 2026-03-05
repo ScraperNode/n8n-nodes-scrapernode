@@ -3,6 +3,7 @@ import type {
 	IExecuteFunctions,
 	IHttpRequestOptions,
 } from "n8n-workflow";
+import { setTimeout as sleep } from "node:timers/promises";
 
 export const BASE_URL = "https://actions.useweld.app";
 
@@ -40,7 +41,7 @@ export async function httpWithRetry(
 			if (retries < MAX_RETRIES && isRetryableError(error)) {
 				retries++;
 				const backoff = 1000 * 2 ** retries;
-				await new Promise((resolve) => setTimeout(resolve, backoff));
+				await sleep(backoff);
 				continue;
 			}
 			throw error;
