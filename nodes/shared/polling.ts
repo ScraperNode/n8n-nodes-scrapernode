@@ -4,6 +4,7 @@ import type {
 	INodeExecutionData,
 } from "n8n-workflow";
 import { NodeOperationError } from "n8n-workflow";
+import { setTimeout as sleep } from "node:timers/promises";
 import { httpWithRetry } from "./api";
 
 export async function pollForResults(
@@ -38,7 +39,7 @@ export async function pollForResults(
 			};
 		}
 
-		await new Promise((resolve) => setTimeout(resolve, pollInterval * 1000));
+		await sleep(pollInterval * 1000);
 
 		const jobResponse = await httpWithRetry(ctx, {
 			method: "GET",

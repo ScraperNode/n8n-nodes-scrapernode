@@ -21,3 +21,5 @@ jobs:
       - run: pnpm lint
       - run: pnpm build
       - run: pnpm test
+      - name: n8n community package scan
+        run: npx @n8n/scan-community-package n8n-nodes-weld --path .
