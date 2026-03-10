@@ -27,11 +27,11 @@
   "main": "dist/nodes/ScraperNodeJobs/ScraperNodeJobs.node.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/scrapernode/n8n-nodes-scrapernode.git"
+    "url": "https://github.com/ScraperNode/n8n-nodes-scrapernode.git"
   },
   "homepage": "https://scrapernode.com",
   "bugs": {
-    "url": "https://github.com/scrapernode/n8n-nodes-scrapernode/issues"
+    "url": "https://github.com/ScraperNode/n8n-nodes-scrapernode/issues"
   },
   "publishConfig": {
     "access": "public",
