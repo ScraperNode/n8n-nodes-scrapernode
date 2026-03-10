@@ -92,7 +92,7 @@
     "lint:n8n-scan": "eslint --config eslint.n8n-scan.config.mjs --max-warnings 0 'dist/**/*.js'",
     "test": "vitest run",
     "test:watch": "vitest",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build && pnpm lint:n8n-scan"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
