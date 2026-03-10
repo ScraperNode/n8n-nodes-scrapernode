@@ -1,29 +1,29 @@
 import type { INodeType } from "n8n-workflow";
 import { NodeOperationError } from "n8n-workflow";
 import { describe, expect, it, vi } from "vitest";
-import { WeldCrunchbaseCompanies } from "../../nodes/WeldCrunchbaseCompanies/WeldCrunchbaseCompanies.node";
-import { WeldFacebookGroups } from "../../nodes/WeldFacebookGroups/WeldFacebookGroups.node";
-import { WeldFacebookProfiles } from "../../nodes/WeldFacebookProfiles/WeldFacebookProfiles.node";
-import { WeldGitHubRepositories } from "../../nodes/WeldGitHubRepositories/WeldGitHubRepositories.node";
-import { WeldGlassdoorCompanies } from "../../nodes/WeldGlassdoorCompanies/WeldGlassdoorCompanies.node";
-import { WeldGlassdoorJobs } from "../../nodes/WeldGlassdoorJobs/WeldGlassdoorJobs.node";
-import { WeldGlassdoorReviews } from "../../nodes/WeldGlassdoorReviews/WeldGlassdoorReviews.node";
-import { WeldIndeedCompanies } from "../../nodes/WeldIndeedCompanies/WeldIndeedCompanies.node";
-import { WeldIndeedJobs } from "../../nodes/WeldIndeedJobs/WeldIndeedJobs.node";
-import { WeldInstagramComments } from "../../nodes/WeldInstagramComments/WeldInstagramComments.node";
-import { WeldInstagramPosts } from "../../nodes/WeldInstagramPosts/WeldInstagramPosts.node";
-import { WeldInstagramProfiles } from "../../nodes/WeldInstagramProfiles/WeldInstagramProfiles.node";
-import { WeldLinkedInCompanies } from "../../nodes/WeldLinkedInCompanies/WeldLinkedInCompanies.node";
-import { WeldLinkedInPosts } from "../../nodes/WeldLinkedInPosts/WeldLinkedInPosts.node";
-import { WeldLinkedInProfiles } from "../../nodes/WeldLinkedInProfiles/WeldLinkedInProfiles.node";
-import { WeldTikTokProfiles } from "../../nodes/WeldTikTokProfiles/WeldTikTokProfiles.node";
-import { WeldTikTokVideos } from "../../nodes/WeldTikTokVideos/WeldTikTokVideos.node";
-import { WeldTwitterPosts } from "../../nodes/WeldTwitterPosts/WeldTwitterPosts.node";
-import { WeldTwitterProfiles } from "../../nodes/WeldTwitterProfiles/WeldTwitterProfiles.node";
-import { WeldYelpBusinesses } from "../../nodes/WeldYelpBusinesses/WeldYelpBusinesses.node";
-import { WeldYelpReviews } from "../../nodes/WeldYelpReviews/WeldYelpReviews.node";
-import { WeldYouTubeChannels } from "../../nodes/WeldYouTubeChannels/WeldYouTubeChannels.node";
-import { WeldYouTubeComments } from "../../nodes/WeldYouTubeComments/WeldYouTubeComments.node";
+import { ScraperNodeCrunchbaseCompanies } from "../../nodes/ScraperNodeCrunchbaseCompanies/ScraperNodeCrunchbaseCompanies.node";
+import { ScraperNodeFacebookGroups } from "../../nodes/ScraperNodeFacebookGroups/ScraperNodeFacebookGroups.node";
+import { ScraperNodeFacebookProfiles } from "../../nodes/ScraperNodeFacebookProfiles/ScraperNodeFacebookProfiles.node";
+import { ScraperNodeGitHubRepositories } from "../../nodes/ScraperNodeGitHubRepositories/ScraperNodeGitHubRepositories.node";
+import { ScraperNodeGlassdoorCompanies } from "../../nodes/ScraperNodeGlassdoorCompanies/ScraperNodeGlassdoorCompanies.node";
+import { ScraperNodeGlassdoorJobs } from "../../nodes/ScraperNodeGlassdoorJobs/ScraperNodeGlassdoorJobs.node";
+import { ScraperNodeGlassdoorReviews } from "../../nodes/ScraperNodeGlassdoorReviews/ScraperNodeGlassdoorReviews.node";
+import { ScraperNodeIndeedCompanies } from "../../nodes/ScraperNodeIndeedCompanies/ScraperNodeIndeedCompanies.node";
+import { ScraperNodeIndeedJobs } from "../../nodes/ScraperNodeIndeedJobs/ScraperNodeIndeedJobs.node";
+import { ScraperNodeInstagramComments } from "../../nodes/ScraperNodeInstagramComments/ScraperNodeInstagramComments.node";
+import { ScraperNodeInstagramPosts } from "../../nodes/ScraperNodeInstagramPosts/ScraperNodeInstagramPosts.node";
+import { ScraperNodeInstagramProfiles } from "../../nodes/ScraperNodeInstagramProfiles/ScraperNodeInstagramProfiles.node";
+import { ScraperNodeLinkedInCompanies } from "../../nodes/ScraperNodeLinkedInCompanies/ScraperNodeLinkedInCompanies.node";
+import { ScraperNodeLinkedInPosts } from "../../nodes/ScraperNodeLinkedInPosts/ScraperNodeLinkedInPosts.node";
+import { ScraperNodeLinkedInProfiles } from "../../nodes/ScraperNodeLinkedInProfiles/ScraperNodeLinkedInProfiles.node";
+import { ScraperNodeTikTokProfiles } from "../../nodes/ScraperNodeTikTokProfiles/ScraperNodeTikTokProfiles.node";
+import { ScraperNodeTikTokVideos } from "../../nodes/ScraperNodeTikTokVideos/ScraperNodeTikTokVideos.node";
+import { ScraperNodeTwitterPosts } from "../../nodes/ScraperNodeTwitterPosts/ScraperNodeTwitterPosts.node";
+import { ScraperNodeTwitterProfiles } from "../../nodes/ScraperNodeTwitterProfiles/ScraperNodeTwitterProfiles.node";
+import { ScraperNodeYelpBusinesses } from "../../nodes/ScraperNodeYelpBusinesses/ScraperNodeYelpBusinesses.node";
+import { ScraperNodeYelpReviews } from "../../nodes/ScraperNodeYelpReviews/ScraperNodeYelpReviews.node";
+import { ScraperNodeYouTubeChannels } from "../../nodes/ScraperNodeYouTubeChannels/ScraperNodeYouTubeChannels.node";
+import { ScraperNodeYouTubeComments } from "../../nodes/ScraperNodeYouTubeComments/ScraperNodeYouTubeComments.node";
 import {
 	mockCreateJobResponse,
 	mockJobCompleted,
@@ -52,141 +52,141 @@ interface ScraperTestCase {
 
 const SCRAPERS: ScraperTestCase[] = [
 	{
-		name: "WeldLinkedInProfiles",
-		NodeClass: WeldLinkedInProfiles,
+		name: "ScraperNodeLinkedInProfiles",
+		NodeClass: ScraperNodeLinkedInProfiles,
 		scraperId: "linkedin-profiles",
 		sampleUrl: "https://linkedin.com/in/janedoe",
 	},
 	{
-		name: "WeldLinkedInCompanies",
-		NodeClass: WeldLinkedInCompanies,
+		name: "ScraperNodeLinkedInCompanies",
+		NodeClass: ScraperNodeLinkedInCompanies,
 		scraperId: "linkedin-companies",
 		sampleUrl: "https://linkedin.com/company/acme",
 	},
 	{
-		name: "WeldLinkedInPosts",
-		NodeClass: WeldLinkedInPosts,
+		name: "ScraperNodeLinkedInPosts",
+		NodeClass: ScraperNodeLinkedInPosts,
 		scraperId: "linkedin-posts",
 		sampleUrl: "https://linkedin.com/in/janedoe",
 	},
 	{
-		name: "WeldInstagramProfiles",
-		NodeClass: WeldInstagramProfiles,
+		name: "ScraperNodeInstagramProfiles",
+		NodeClass: ScraperNodeInstagramProfiles,
 		scraperId: "instagram-profiles",
 		sampleUrl: "https://instagram.com/username",
 	},
 	{
-		name: "WeldInstagramPosts",
-		NodeClass: WeldInstagramPosts,
+		name: "ScraperNodeInstagramPosts",
+		NodeClass: ScraperNodeInstagramPosts,
 		scraperId: "instagram-posts",
 		sampleUrl: "https://instagram.com/p/ABC123",
 	},
 	{
-		name: "WeldInstagramComments",
-		NodeClass: WeldInstagramComments,
+		name: "ScraperNodeInstagramComments",
+		NodeClass: ScraperNodeInstagramComments,
 		scraperId: "instagram-comments",
 		sampleUrl: "https://instagram.com/p/ABC123",
 	},
 	{
-		name: "WeldTikTokProfiles",
-		NodeClass: WeldTikTokProfiles,
+		name: "ScraperNodeTikTokProfiles",
+		NodeClass: ScraperNodeTikTokProfiles,
 		scraperId: "tiktok-profiles",
 		sampleUrl: "https://tiktok.com/@username",
 	},
 	{
-		name: "WeldTikTokVideos",
-		NodeClass: WeldTikTokVideos,
+		name: "ScraperNodeTikTokVideos",
+		NodeClass: ScraperNodeTikTokVideos,
 		scraperId: "tiktok-posts",
 		sampleUrl: "https://tiktok.com/@user/video/123",
 	},
 	{
-		name: "WeldTwitterProfiles",
-		NodeClass: WeldTwitterProfiles,
+		name: "ScraperNodeTwitterProfiles",
+		NodeClass: ScraperNodeTwitterProfiles,
 		scraperId: "twitter-profiles",
 		sampleUrl: "https://x.com/username",
 	},
 	{
-		name: "WeldTwitterPosts",
-		NodeClass: WeldTwitterPosts,
+		name: "ScraperNodeTwitterPosts",
+		NodeClass: ScraperNodeTwitterPosts,
 		scraperId: "twitter-posts",
 		sampleUrl: "https://x.com/user/status/123",
 	},
 	{
-		name: "WeldYouTubeChannels",
-		NodeClass: WeldYouTubeChannels,
+		name: "ScraperNodeYouTubeChannels",
+		NodeClass: ScraperNodeYouTubeChannels,
 		scraperId: "youtube-channels",
 		sampleUrl: "https://youtube.com/@channel",
 	},
 	{
-		name: "WeldYouTubeComments",
-		NodeClass: WeldYouTubeComments,
+		name: "ScraperNodeYouTubeComments",
+		NodeClass: ScraperNodeYouTubeComments,
 		scraperId: "youtube-comments",
 		sampleUrl: "https://youtube.com/watch?v=abc123",
 	},
 	{
-		name: "WeldFacebookProfiles",
-		NodeClass: WeldFacebookProfiles,
+		name: "ScraperNodeFacebookProfiles",
+		NodeClass: ScraperNodeFacebookProfiles,
 		scraperId: "facebook-profiles",
 		sampleUrl: "https://facebook.com/username",
 	},
 	{
-		name: "WeldFacebookGroups",
-		NodeClass: WeldFacebookGroups,
+		name: "ScraperNodeFacebookGroups",
+		NodeClass: ScraperNodeFacebookGroups,
 		scraperId: "facebook-groups",
 		sampleUrl: "https://facebook.com/groups/groupname",
 	},
 	{
-		name: "WeldIndeedJobs",
-		NodeClass: WeldIndeedJobs,
+		name: "ScraperNodeIndeedJobs",
+		NodeClass: ScraperNodeIndeedJobs,
 		scraperId: "indeed-jobs",
 		sampleUrl: "https://indeed.com/viewjob?jk=abc123",
 	},
 	{
-		name: "WeldIndeedCompanies",
-		NodeClass: WeldIndeedCompanies,
+		name: "ScraperNodeIndeedCompanies",
+		NodeClass: ScraperNodeIndeedCompanies,
 		scraperId: "indeed-companies",
 		sampleUrl: "https://indeed.com/cmp/Acme-Corp",
 	},
 	{
-		name: "WeldGlassdoorCompanies",
-		NodeClass: WeldGlassdoorCompanies,
+		name: "ScraperNodeGlassdoorCompanies",
+		NodeClass: ScraperNodeGlassdoorCompanies,
 		scraperId: "glassdoor-companies",
 		sampleUrl: "https://glassdoor.com/Overview/Working-at-Acme-Corp",
 	},
 	{
-		name: "WeldGlassdoorReviews",
-		NodeClass: WeldGlassdoorReviews,
+		name: "ScraperNodeGlassdoorReviews",
+		NodeClass: ScraperNodeGlassdoorReviews,
 		scraperId: "glassdoor-reviews",
 		sampleUrl: "https://glassdoor.com/Reviews/Acme-Corp-Reviews-E12345.htm",
 	},
 	{
-		name: "WeldGlassdoorJobs",
-		NodeClass: WeldGlassdoorJobs,
+		name: "ScraperNodeGlassdoorJobs",
+		NodeClass: ScraperNodeGlassdoorJobs,
 		scraperId: "glassdoor-jobs",
 		sampleUrl:
 			"https://glassdoor.com/Job/acme-corp-software-engineer-JV12345.htm",
 	},
 	{
-		name: "WeldYelpBusinesses",
-		NodeClass: WeldYelpBusinesses,
+		name: "ScraperNodeYelpBusinesses",
+		NodeClass: ScraperNodeYelpBusinesses,
 		scraperId: "yelp-businesses",
 		sampleUrl: "https://yelp.com/biz/acme-restaurant-new-york",
 	},
 	{
-		name: "WeldYelpReviews",
-		NodeClass: WeldYelpReviews,
+		name: "ScraperNodeYelpReviews",
+		NodeClass: ScraperNodeYelpReviews,
 		scraperId: "yelp-reviews",
 		sampleUrl: "https://yelp.com/biz/acme-restaurant-new-york",
 	},
 	{
-		name: "WeldGitHubRepositories",
-		NodeClass: WeldGitHubRepositories,
+		name: "ScraperNodeGitHubRepositories",
+		NodeClass: ScraperNodeGitHubRepositories,
 		scraperId: "github-repositories",
 		sampleUrl: "https://github.com/owner/repo",
 	},
 	{
-		name: "WeldCrunchbaseCompanies",
-		NodeClass: WeldCrunchbaseCompanies,
+		name: "ScraperNodeCrunchbaseCompanies",
+		NodeClass: ScraperNodeCrunchbaseCompanies,
 		scraperId: "crunchbase-companies",
 		sampleUrl: "https://crunchbase.com/organization/acme-corp",
 	},

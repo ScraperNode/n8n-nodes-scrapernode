@@ -35,7 +35,7 @@ services:
     volumes:
       - n8n_data:/home/node/.n8n
       # Override the baked-in dist with the live local copy for hot iteration
-      - ./dist:/opt/n8n-nodes-weld/dist:ro
+      - ./dist:/opt/n8n-nodes-scrapernode/dist:ro
 
 volumes:
   postgres_data:

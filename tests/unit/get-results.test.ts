@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { WeldJobs } from "../../nodes/WeldJobs/WeldJobs.node";
+import { ScraperNodeJobs } from "../../nodes/ScraperNodeJobs/ScraperNodeJobs.node";
 import { mockEmptyResults, mockResults } from "../mocks/mockData";
 import { createMockExecuteFunctions } from "../mocks/mockExecuteFunctions";
 
-const node = new WeldJobs();
+const node = new ScraperNodeJobs();
 
 describe("scrapeJob getResults operation", () => {
 	it("should call the correct URL with jobId and limit", async () => {

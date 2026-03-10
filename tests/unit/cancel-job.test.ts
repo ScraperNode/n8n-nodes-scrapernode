@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { WeldJobs } from "../../nodes/WeldJobs/WeldJobs.node";
+import { ScraperNodeJobs } from "../../nodes/ScraperNodeJobs/ScraperNodeJobs.node";
 import { createMockExecuteFunctions } from "../mocks/mockExecuteFunctions";
 
-const node = new WeldJobs();
+const node = new ScraperNodeJobs();
 
 const mockCancelResponse = {
 	jobId: "job_abc123",

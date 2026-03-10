@@ -1,0 +1,21 @@
+{
+  "node": "n8n-nodes-scrapernode.scraperNodeGitHubRepositories",
+  "nodeVersion": "1.0",
+  "codexVersion": "1.0",
+  "categories": ["Development"],
+  "subcategories": {
+    "Development": ["Developer Tools"]
+  },
+  "resources": {
+    "primaryDocumentation": [{ "url": "https://scrapernode.com/docs/api" }]
+  },
+  "alias": [
+    "scrapernode",
+    "scrape",
+    "data extraction",
+    "github",
+    "repositories",
+    "open source",
+    "code"
+  ]
+}

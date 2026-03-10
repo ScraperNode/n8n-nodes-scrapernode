@@ -26,7 +26,7 @@ function buildDescription(config: ScraperNodeConfig): INodeTypeDescription {
 		inputs: ["main"],
 		outputs: ["main"],
 		usableAsTool: true,
-		credentials: [{ name: "weldApi", required: true }],
+		credentials: [{ name: "scraperNodeApi", required: true }],
 		properties: [
 			{
 				displayName: "Operation",
@@ -159,7 +159,7 @@ export function buildScraperNodeClass(
 		async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 			const items = this.getInputData();
 			const returnData: INodeExecutionData[] = [];
-			await this.getCredentials("weldApi");
+			await this.getCredentials("scraperNodeApi");
 			const baseUrl = BASE_URL;
 
 			for (let i = 0; i < items.length; i++) {
@@ -318,7 +318,7 @@ async function createScrapeJob(
 
 	const createResponse = await ctx.helpers.httpRequestWithAuthentication.call(
 		ctx,
-		"weldApi",
+		"scraperNodeApi",
 		{
 			method: "POST",
 			url: `${baseUrl}/api/jobs/create`,

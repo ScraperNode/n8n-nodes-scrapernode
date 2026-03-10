@@ -1,4 +1,4 @@
-/** Mock API responses matching the Weld REST API shape. */
+/** Mock API responses matching the ScraperNode REST API shape. */
 
 export const mockCreateJobResponse = {
 	jobId: "job_abc123",

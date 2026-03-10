@@ -20,7 +20,7 @@ interface MockOptions {
 }
 
 const DEFAULT_CREDENTIALS = {
-	apiKey: "weld_test_key_123",
+	apiKey: "sn_test_key_123",
 };
 
 /** IExecuteFunctions with typed mock helpers for test assertions. */
@@ -32,7 +32,7 @@ export type MockedExecuteFunctions = IExecuteFunctions & {
 
 /**
  * Creates a mock IExecuteFunctions that can be used with `.call(mock)` on the
- * Weld node's execute method and the createJob helper.
+ * ScraperNode node's execute method and the createJob helper.
  */
 export function createMockExecuteFunctions(
 	options: MockOptions = {}
@@ -72,8 +72,8 @@ export function createMockExecuteFunctions(
 		getCredentials: vi.fn(async (_name: string) => credentials),
 
 		getNode: vi.fn(() => ({
-			name: "Weld",
-			type: "n8n-nodes-weld.weld",
+			name: "ScraperNode",
+			type: "n8n-nodes-scrapernode.scraperNode",
 			typeVersion: 1,
 			position: [0, 0],
 			parameters: {},

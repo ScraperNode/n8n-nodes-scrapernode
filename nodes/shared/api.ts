@@ -4,7 +4,7 @@ import type {
 	IHttpRequestOptions,
 } from "n8n-workflow";
 import { sleep } from "n8n-workflow";
-export const BASE_URL = "https://actions.useweld.app";
+export const BASE_URL = "https://api.scrapernode.com";
 
 const MAX_RETRIES = 3;
 const HTTP_5XX_RE = /5\d{2}/;
@@ -33,7 +33,7 @@ export async function httpWithRetry(
 		try {
 			return (await ctx.helpers.httpRequestWithAuthentication.call(
 				ctx,
-				"weldApi",
+				"scraperNodeApi",
 				options
 			)) as IDataObject;
 		} catch (error) {

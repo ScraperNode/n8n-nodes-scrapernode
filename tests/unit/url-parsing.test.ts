@@ -1,14 +1,14 @@
 import type { INodeType } from "n8n-workflow";
 import { NodeOperationError } from "n8n-workflow";
 import { describe, expect, it } from "vitest";
-import { WeldLinkedInProfiles } from "../../nodes/WeldLinkedInProfiles/WeldLinkedInProfiles.node";
+import { ScraperNodeLinkedInProfiles } from "../../nodes/ScraperNodeLinkedInProfiles/ScraperNodeLinkedInProfiles.node";
 import { mockCreateJobResponse } from "../mocks/mockData";
 import {
 	createMockExecuteFunctions,
 	type MockedExecuteFunctions,
 } from "../mocks/mockExecuteFunctions";
 
-const node: INodeType = new WeldLinkedInProfiles();
+const node: INodeType = new ScraperNodeLinkedInProfiles();
 
 async function run(mock: MockedExecuteFunctions) {
 	return (await node.execute!.call(mock)) as unknown as {

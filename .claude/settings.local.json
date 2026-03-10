@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:docs.n8n.io)",
+      "WebFetch(domain:blog.n8n.io)",
+      "Bash(gh api:*)",
+      "Bash(gh search:*)",
+      "WebFetch(domain:community.n8n.io)",
+      "Bash(gh pr:*)",
+      "WebFetch(domain:www.n8nshow.com)",
+      "Bash(gh run:*)",
+      "Bash(pnpm:*)",
+      "Bash(find:*)",
+      "WebFetch(domain:medium.com)",
+      "Bash(npx:*)",
+      "WebFetch(domain:docs.npmjs.com)",
+      "Bash(npm view:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(npm install:*)",
+      "Bash(git fetch:*)",
+      "Bash(NODE_PATH=./node_modules npx:*)",
+      "Bash(grep:*)",
+      "Bash(test:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(node:*)",
+      "Bash(docker exec:*)",
+      "Bash(docker compose:*)",
+      "Bash(gcloud config:*)",
+      "Bash(gcloud projects:*)",
+      "Bash(gcloud:*)",
+      "Bash(curl:*)",
+      "WebFetch(domain:www.useweld.app)",
+      "Bash(git -C /Users/chief/projects/useweld-resources/n8n-nodes-weld log --oneline -10)"
+    ]
+  }
+}

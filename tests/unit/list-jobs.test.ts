@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { WeldJobs } from "../../nodes/WeldJobs/WeldJobs.node";
+import { ScraperNodeJobs } from "../../nodes/ScraperNodeJobs/ScraperNodeJobs.node";
 import { mockJobsList } from "../mocks/mockData";
 import { createMockExecuteFunctions } from "../mocks/mockExecuteFunctions";
 
-const node = new WeldJobs();
+const node = new ScraperNodeJobs();
 
 describe("scrapeJob list operation", () => {
 	it("should return each job as a separate item with pairedItem", async () => {

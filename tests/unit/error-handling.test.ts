@@ -1,9 +1,9 @@
 import { NodeOperationError } from "n8n-workflow";
 import { describe, expect, it } from "vitest";
-import { WeldJobs } from "../../nodes/WeldJobs/WeldJobs.node";
+import { ScraperNodeJobs } from "../../nodes/ScraperNodeJobs/ScraperNodeJobs.node";
 import { createMockExecuteFunctions } from "../mocks/mockExecuteFunctions";
 
-const node = new WeldJobs();
+const node = new ScraperNodeJobs();
 
 describe("error handling", () => {
 	it("should throw NodeOperationError when continueOnFail is false", async () => {

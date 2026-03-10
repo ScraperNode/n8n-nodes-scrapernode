@@ -1,11 +1,11 @@
 {
-  "name": "n8n-nodes-weld",
+  "name": "n8n-nodes-scrapernode",
   "version": "1.0.0",
-  "description": "n8n community node for Weld — web scraping across LinkedIn, Instagram, TikTok, Twitter/X, YouTube & Facebook",
+  "description": "n8n community node for ScraperNode — web scraping across LinkedIn, Instagram, TikTok, Twitter/X, YouTube & Facebook",
   "author": {
-    "name": "Weld Contributors",
-    "email": "dev@useweld.app",
-    "url": "https://www.useweld.app"
+    "name": "ScraperNode Contributors",
+    "email": "dev@scrapernode.com",
+    "url": "https://scrapernode.com"
   },
   "keywords": [
     "n8n-community-node-package",
@@ -19,18 +19,19 @@
     "youtube",
     "facebook",
     "lead-generation",
-    "data-extraction"
+    "data-extraction",
+    "scrapernode"
   ],
   "packageManager": "pnpm@10.28.2",
   "license": "MIT",
-  "main": "dist/nodes/WeldJobs/WeldJobs.node.js",
+  "main": "dist/nodes/ScraperNodeJobs/ScraperNodeJobs.node.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/useweld/n8n-nodes-weld.git"
+    "url": "https://github.com/scrapernode/n8n-nodes-scrapernode.git"
   },
-  "homepage": "https://www.useweld.app",
+  "homepage": "https://scrapernode.com",
   "bugs": {
-    "url": "https://github.com/useweld/n8n-nodes-weld/issues"
+    "url": "https://github.com/scrapernode/n8n-nodes-scrapernode/issues"
   },
   "publishConfig": {
     "access": "public",
@@ -43,33 +44,33 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/WeldApi.credentials.js"
+      "dist/credentials/ScraperNodeApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/WeldJobs/WeldJobs.node.js",
-      "dist/nodes/WeldLinkedInProfiles/WeldLinkedInProfiles.node.js",
-      "dist/nodes/WeldLinkedInCompanies/WeldLinkedInCompanies.node.js",
-      "dist/nodes/WeldLinkedInPosts/WeldLinkedInPosts.node.js",
-      "dist/nodes/WeldInstagramProfiles/WeldInstagramProfiles.node.js",
-      "dist/nodes/WeldInstagramPosts/WeldInstagramPosts.node.js",
-      "dist/nodes/WeldInstagramComments/WeldInstagramComments.node.js",
-      "dist/nodes/WeldTikTokProfiles/WeldTikTokProfiles.node.js",
-      "dist/nodes/WeldTikTokVideos/WeldTikTokVideos.node.js",
-      "dist/nodes/WeldTwitterProfiles/WeldTwitterProfiles.node.js",
-      "dist/nodes/WeldTwitterPosts/WeldTwitterPosts.node.js",
-      "dist/nodes/WeldYouTubeChannels/WeldYouTubeChannels.node.js",
-      "dist/nodes/WeldYouTubeComments/WeldYouTubeComments.node.js",
-      "dist/nodes/WeldFacebookProfiles/WeldFacebookProfiles.node.js",
-      "dist/nodes/WeldFacebookGroups/WeldFacebookGroups.node.js",
-      "dist/nodes/WeldIndeedJobs/WeldIndeedJobs.node.js",
-      "dist/nodes/WeldIndeedCompanies/WeldIndeedCompanies.node.js",
-      "dist/nodes/WeldGlassdoorCompanies/WeldGlassdoorCompanies.node.js",
-      "dist/nodes/WeldGlassdoorReviews/WeldGlassdoorReviews.node.js",
-      "dist/nodes/WeldGlassdoorJobs/WeldGlassdoorJobs.node.js",
-      "dist/nodes/WeldYelpBusinesses/WeldYelpBusinesses.node.js",
-      "dist/nodes/WeldYelpReviews/WeldYelpReviews.node.js",
-      "dist/nodes/WeldGitHubRepositories/WeldGitHubRepositories.node.js",
-      "dist/nodes/WeldCrunchbaseCompanies/WeldCrunchbaseCompanies.node.js"
+      "dist/nodes/ScraperNodeJobs/ScraperNodeJobs.node.js",
+      "dist/nodes/ScraperNodeLinkedInProfiles/ScraperNodeLinkedInProfiles.node.js",
+      "dist/nodes/ScraperNodeLinkedInCompanies/ScraperNodeLinkedInCompanies.node.js",
+      "dist/nodes/ScraperNodeLinkedInPosts/ScraperNodeLinkedInPosts.node.js",
+      "dist/nodes/ScraperNodeInstagramProfiles/ScraperNodeInstagramProfiles.node.js",
+      "dist/nodes/ScraperNodeInstagramPosts/ScraperNodeInstagramPosts.node.js",
+      "dist/nodes/ScraperNodeInstagramComments/ScraperNodeInstagramComments.node.js",
+      "dist/nodes/ScraperNodeTikTokProfiles/ScraperNodeTikTokProfiles.node.js",
+      "dist/nodes/ScraperNodeTikTokVideos/ScraperNodeTikTokVideos.node.js",
+      "dist/nodes/ScraperNodeTwitterProfiles/ScraperNodeTwitterProfiles.node.js",
+      "dist/nodes/ScraperNodeTwitterPosts/ScraperNodeTwitterPosts.node.js",
+      "dist/nodes/ScraperNodeYouTubeChannels/ScraperNodeYouTubeChannels.node.js",
+      "dist/nodes/ScraperNodeYouTubeComments/ScraperNodeYouTubeComments.node.js",
+      "dist/nodes/ScraperNodeFacebookProfiles/ScraperNodeFacebookProfiles.node.js",
+      "dist/nodes/ScraperNodeFacebookGroups/ScraperNodeFacebookGroups.node.js",
+      "dist/nodes/ScraperNodeIndeedJobs/ScraperNodeIndeedJobs.node.js",
+      "dist/nodes/ScraperNodeIndeedCompanies/ScraperNodeIndeedCompanies.node.js",
+      "dist/nodes/ScraperNodeGlassdoorCompanies/ScraperNodeGlassdoorCompanies.node.js",
+      "dist/nodes/ScraperNodeGlassdoorReviews/ScraperNodeGlassdoorReviews.node.js",
+      "dist/nodes/ScraperNodeGlassdoorJobs/ScraperNodeGlassdoorJobs.node.js",
+      "dist/nodes/ScraperNodeYelpBusinesses/ScraperNodeYelpBusinesses.node.js",
+      "dist/nodes/ScraperNodeYelpReviews/ScraperNodeYelpReviews.node.js",
+      "dist/nodes/ScraperNodeGitHubRepositories/ScraperNodeGitHubRepositories.node.js",
+      "dist/nodes/ScraperNodeCrunchbaseCompanies/ScraperNodeCrunchbaseCompanies.node.js"
     ]
   },
   "scripts": {
