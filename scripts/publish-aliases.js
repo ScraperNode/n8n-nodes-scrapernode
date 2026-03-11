@@ -17,8 +17,9 @@ for (const alias of ALIASES) {
 	// Copy dist directory
 	cpSync(join(__dirname, "..", "dist"), join(tmp, "dist"), { recursive: true });
 
-	// Write modified package.json
-	const aliasPkg = { ...pkg, name: alias };
+	// Write modified package.json (strip scripts to avoid prepublishOnly in temp dir)
+	const { scripts, devDependencies, packageManager, ...rest } = pkg;
+	const aliasPkg = { ...rest, name: alias };
 	writeFileSync(join(tmp, "package.json"), JSON.stringify(aliasPkg, null, 2));
 
 	try {
