@@ -35,7 +35,7 @@ export class ScraperNodeJobs implements INodeType {
 				noDataExpression: true,
 				options: [
 					{ name: "Job", value: "job" },
-					{ name: "Credits", value: "credits" },
+					{ name: 'Credit', value: "credits" },
 				],
 				default: "job",
 			},
@@ -102,10 +102,10 @@ export class ScraperNodeJobs implements INodeType {
 				type: "options",
 				options: [
 					{ name: "All", value: "" },
-					{ name: "Pending", value: "pending" },
-					{ name: "Processing", value: "processing" },
 					{ name: "Completed", value: "completed" },
 					{ name: "Failed", value: "failed" },
+					{ name: "Pending", value: "pending" },
+					{ name: "Processing", value: "processing" },
 				],
 				default: "",
 				displayOptions: {
