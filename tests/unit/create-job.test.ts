@@ -29,7 +29,7 @@ describe("scraper create operation", () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
 				operation: "create",
-				urls: "https://linkedin.com/in/test",
+				"inputs.input": [{ url: "https://linkedin.com/in/test" }],
 				jobName: "My Test Job",
 				waitForCompletion: false,
 			},
@@ -46,7 +46,10 @@ describe("scraper create operation", () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
 				operation: "create",
-				urls: "https://linkedin.com/in/user1\nhttps://linkedin.com/in/user2",
+				"inputs.input": [
+					{ url: "https://linkedin.com/in/user1" },
+					{ url: "https://linkedin.com/in/user2" },
+				],
 				jobName: "LI Batch",
 				waitForCompletion: false,
 			},
@@ -81,7 +84,7 @@ describe("scraper create operation", () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
 				operation: "create",
-				urls: "https://linkedin.com/in/test",
+				"inputs.input": [{ url: "https://linkedin.com/in/test" }],
 				jobName: "",
 				waitForCompletion: false,
 			},
@@ -102,7 +105,7 @@ describe("scraper create operation", () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
 				operation: "create",
-				urls: "https://linkedin.com/in/test",
+				"inputs.input": [{ url: "https://linkedin.com/in/test" }],
 				jobName: "",
 				waitForCompletion: true,
 				pollInterval: 1,
@@ -144,7 +147,7 @@ describe("scraper create operation", () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
 				operation: "create",
-				urls: "https://linkedin.com/in/test",
+				"inputs.input": [{ url: "https://linkedin.com/in/test" }],
 				jobName: "",
 				waitForCompletion: true,
 				pollInterval: 1,
@@ -174,7 +177,7 @@ describe("scraper create operation", () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
 				operation: "create",
-				urls: "https://linkedin.com/in/test",
+				"inputs.input": [{ url: "https://linkedin.com/in/test" }],
 				jobName: "",
 				waitForCompletion: true,
 				pollInterval: 1,
@@ -198,7 +201,7 @@ describe("scraper create operation", () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
 				operation: "create",
-				urls: "https://linkedin.com/in/test",
+				"inputs.input": [{ url: "https://linkedin.com/in/test" }],
 				jobName: "",
 				waitForCompletion: true,
 				pollInterval: 1,
@@ -227,7 +230,7 @@ describe("scraper create operation", () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
 				operation: "create",
-				urls: "https://linkedin.com/in/test",
+				"inputs.input": [{ url: "https://linkedin.com/in/test" }],
 				jobName: "",
 				waitForCompletion: true,
 				pollInterval: 1,
@@ -261,7 +264,7 @@ describe("scraper create operation", () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
 				operation: "create",
-				urls: "https://linkedin.com/in/test",
+				"inputs.input": [{ url: "https://linkedin.com/in/test" }],
 				jobName: "",
 				waitForCompletion: true,
 				pollInterval: 1,
@@ -294,7 +297,7 @@ describe("scraper create operation", () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
 				operation: "create",
-				urls: "https://linkedin.com/in/test",
+				"inputs.input": [{ url: "https://linkedin.com/in/test" }],
 				jobName: "",
 				waitForCompletion: true,
 				pollInterval: 1,
@@ -326,7 +329,7 @@ describe("scraper create operation", () => {
 		const mock = createMockExecuteFunctions({
 			nodeParameters: {
 				operation: "create",
-				urls: "https://linkedin.com/in/test",
+				"inputs.input": [{ url: "https://linkedin.com/in/test" }],
 				jobName: "",
 				waitForCompletion: true,
 				pollInterval: 1,

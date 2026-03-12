@@ -2,13 +2,129 @@ import type {
 	IDataObject,
 	IExecuteFunctions,
 	INodeExecutionData,
+	INodeProperties,
 	INodeType,
 	INodeTypeDescription,
+	NodeHint,
 } from "n8n-workflow";
 import { NodeConnectionTypes, NodeOperationError } from "n8n-workflow";
-import { BASE_URL, URL_SPLIT_RE, httpWithRetry } from "./api";
+import { BASE_URL, httpWithRetry } from "./api";
+import { inputSchemas } from "./inputSchemas";
+import { outputSchemas } from "./outputSchemas";
 import { pollForResults } from "./polling";
 import type { ScraperNodeConfig } from "./types";
+
+/** Convert snake_case field name to display name: "first_name" → "First Name" */
+function toDisplayName(name: string): string {
+	return name
+		.split("_")
+		.map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+		.join(" ");
+}
+
+/**
+ * Build the fixedCollection input property from inputSchemas.
+ * All scrapers use fixedCollection with multipleValues for row-based input.
+ */
+function buildInputProperty(config: ScraperNodeConfig): INodeProperties {
+	const fields = inputSchemas[config.scraperId] ?? [
+		{
+			name: "url",
+			type: "string" as const,
+			required: true,
+			description: config.inputDescription,
+			placeholder: config.inputPlaceholder,
+		},
+	];
+
+	const collectionValues: INodeProperties[] = fields.map((field) => {
+		const base = {
+			displayName: toDisplayName(field.name),
+			name: field.name,
+			required: field.required,
+			description: field.description,
+		};
+
+		if (field.type === "options" && field.options) {
+			return {
+				...base,
+				type: "options" as const,
+				default: "",
+				options: field.options.map((o) => ({
+					name: o.name,
+					value: o.value,
+				})),
+			};
+		}
+
+		if (field.type === "number") {
+			return {
+				...base,
+				type: "number" as const,
+				default: 0,
+				typeOptions: { minValue: 0 },
+			};
+		}
+
+		if (field.type === "boolean") {
+			return {
+				...base,
+				type: "boolean" as const,
+				default: false,
+			};
+		}
+
+		// Default: string
+		return {
+			...base,
+			type: "string" as const,
+			default: "",
+			placeholder: field.placeholder,
+		};
+	});
+
+	return {
+		displayName: config.inputLabel,
+		name: "inputs",
+		type: "fixedCollection",
+		typeOptions: { multipleValues: true },
+		default: {},
+		required: true,
+		displayOptions: { show: { operation: ["create"] } },
+		description: config.inputDescription,
+		options: [
+			{
+				displayName: "Input",
+				name: "input",
+				values: collectionValues,
+			},
+		],
+	};
+}
+
+/** Build NodeHint[] for output field preview from outputSchemas. */
+function buildOutputHints(scraperId: string): NodeHint[] | undefined {
+	const fields = outputSchemas[scraperId];
+	if (!fields) return undefined;
+
+	const required = fields.filter((f) => f.required);
+	const optionalCount = fields.filter((f) => !f.required).length;
+
+	const fieldList = required.map((f) => `\`${f.name}\``).join(", ");
+	const optionalSuffix =
+		optionalCount > 0 ? ` + ${optionalCount} optional fields` : "";
+
+	return [
+		{
+			message: `**Output fields:** ${fieldList}${optionalSuffix}`,
+			type: "info" as const,
+			location: "outputPane" as const,
+			whenToDisplay: "beforeExecution" as const,
+			displayCondition:
+				'={{ $parameter.operation === "getResults" || ($parameter.operation === "create" && $parameter.waitForCompletion === true) }}',
+		},
+	];
+}
 
 function buildDescription(config: ScraperNodeConfig): INodeTypeDescription {
 	return {
@@ -27,6 +143,7 @@ function buildDescription(config: ScraperNodeConfig): INodeTypeDescription {
 		outputs: [NodeConnectionTypes.Main],
 		usableAsTool: true,
 		credentials: [{ name: "scraperNodeApi", required: true }],
+		hints: buildOutputHints(config.scraperId),
 		properties: [
 			{
 				displayName: "Operation",
@@ -55,18 +172,8 @@ function buildDescription(config: ScraperNodeConfig): INodeTypeDescription {
 				],
 				default: "create",
 			},
-			// -- Create fields --
-			{
-				displayName: config.inputLabel,
-				name: "urls",
-				type: "string",
-				default: "",
-				required: true,
-				displayOptions: { show: { operation: ["create"] } },
-				description: config.inputDescription,
-				placeholder: config.inputPlaceholder,
-				typeOptions: { rows: 4 },
-			},
+			// -- Create fields (fixedCollection) --
+			buildInputProperty(config),
 			{
 				displayName: "Job Name",
 				name: "jobName",
@@ -293,7 +400,11 @@ async function createScrapeJob(
 	scraperId: string,
 	allowedDomains: string[]
 ): Promise<INodeExecutionData | INodeExecutionData[]> {
-	const urlsRaw = ctx.getNodeParameter("urls", itemIndex) as string;
+	const collection = ctx.getNodeParameter(
+		"inputs.input",
+		itemIndex,
+		[]
+	) as Array<Record<string, unknown>>;
 	const jobName = ctx.getNodeParameter("jobName", itemIndex, "") as string;
 	const waitForCompletion = ctx.getNodeParameter(
 		"waitForCompletion",
@@ -301,20 +412,32 @@ async function createScrapeJob(
 		false
 	) as boolean;
 
-	const urls = urlsRaw
-		.split(URL_SPLIT_RE)
-		.map((u) => u.trim())
-		.filter((u) => u.length > 0);
+	const fieldDefs = inputSchemas[scraperId] ?? [
+		{ name: "url", type: "string" as const, required: true, description: "" },
+	];
 
-	if (urls.length === 0) {
-		throw new NodeOperationError(ctx.getNode(), "No URLs provided", {
+	const inputs = collection.map((row) => {
+		const input: Record<string, unknown> = {};
+		for (const field of fieldDefs) {
+			const val = row[field.name];
+			if (val !== undefined && val !== "") {
+				input[field.name] = val;
+			}
+		}
+		return input;
+	});
+
+	if (inputs.length === 0) {
+		throw new NodeOperationError(ctx.getNode(), "No inputs provided", {
 			itemIndex,
 		});
 	}
 
+	// Validate URLs from all rows
+	const urls = inputs
+		.map((i) => i.url as string)
+		.filter(Boolean);
 	validateUrls(urls, allowedDomains, ctx, itemIndex);
-
-	const inputs = urls.map((url) => ({ url }));
 
 	const createResponse = await ctx.helpers.httpRequestWithAuthentication.call(
 		ctx,
