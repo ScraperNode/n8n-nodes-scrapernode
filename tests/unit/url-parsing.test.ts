@@ -17,11 +17,11 @@ async function run(mock: MockedExecuteFunctions) {
 	}[][];
 }
 
-function createJobMock(urls: string) {
+function createJobMock(inputs: Array<Record<string, unknown>>) {
 	return createMockExecuteFunctions({
 		nodeParameters: {
 			operation: "create",
-			urls,
+			"inputs.input": inputs,
 			jobName: "",
 			waitForCompletion: false,
 		},
@@ -29,90 +29,9 @@ function createJobMock(urls: string) {
 	});
 }
 
-describe("URL parsing", () => {
-	it("should parse newline-separated URLs", async () => {
-		const mock = createJobMock(
-			"https://linkedin.com/in/alice\nhttps://linkedin.com/in/bob"
-		);
-
-		await run(mock);
-
-		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
-		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
-		expect(body.inputs).toEqual([
-			{ url: "https://linkedin.com/in/alice" },
-			{ url: "https://linkedin.com/in/bob" },
-		]);
-	});
-
-	it("should parse comma-separated URLs", async () => {
-		const mock = createJobMock(
-			"https://linkedin.com/in/alice,https://linkedin.com/in/bob"
-		);
-
-		await run(mock);
-
-		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
-		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
-		expect(body.inputs).toEqual([
-			{ url: "https://linkedin.com/in/alice" },
-			{ url: "https://linkedin.com/in/bob" },
-		]);
-	});
-
-	it("should parse mixed newline and comma URLs", async () => {
-		const mock = createJobMock(
-			"https://linkedin.com/in/a\nhttps://linkedin.com/in/b,https://linkedin.com/in/c\nhttps://linkedin.com/in/d"
-		);
-
-		await run(mock);
-
-		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
-		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
-		expect(body.inputs).toHaveLength(4);
-	});
-
-	it("should trim whitespace from URLs", async () => {
-		const mock = createJobMock(
-			"  https://linkedin.com/in/alice  \n  https://linkedin.com/in/bob  "
-		);
-
-		await run(mock);
-
-		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
-		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
-		expect(body.inputs).toEqual([
-			{ url: "https://linkedin.com/in/alice" },
-			{ url: "https://linkedin.com/in/bob" },
-		]);
-	});
-
-	it("should filter out empty lines", async () => {
-		const mock = createJobMock(
-			"https://linkedin.com/in/alice\n\n\nhttps://linkedin.com/in/bob\n"
-		);
-
-		await run(mock);
-
-		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
-		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
-		expect(body.inputs).toHaveLength(2);
-	});
-
-	it("should throw NodeOperationError when no URLs provided", async () => {
-		const mock = createJobMock("");
-
-		await expect(run(mock)).rejects.toThrow(NodeOperationError);
-	});
-
-	it("should throw NodeOperationError for whitespace-only input", async () => {
-		const mock = createJobMock("   \n  \n  ");
-
-		await expect(run(mock)).rejects.toThrow(NodeOperationError);
-	});
-
-	it("should handle a single URL", async () => {
-		const mock = createJobMock("https://linkedin.com/in/alice");
+describe("fixedCollection input handling", () => {
+	it("should send a single input row", async () => {
+		const mock = createJobMock([{ url: "https://linkedin.com/in/alice" }]);
 
 		await run(mock);
 
@@ -121,14 +40,48 @@ describe("URL parsing", () => {
 		expect(body.inputs).toEqual([{ url: "https://linkedin.com/in/alice" }]);
 	});
 
+	it("should send multiple input rows", async () => {
+		const mock = createJobMock([
+			{ url: "https://linkedin.com/in/alice" },
+			{ url: "https://linkedin.com/in/bob" },
+		]);
+
+		await run(mock);
+
+		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
+		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
+		expect(body.inputs).toEqual([
+			{ url: "https://linkedin.com/in/alice" },
+			{ url: "https://linkedin.com/in/bob" },
+		]);
+	});
+
+	it("should strip empty string fields from input rows", async () => {
+		const mock = createJobMock([
+			{ url: "https://linkedin.com/in/alice", first_name: "" },
+		]);
+
+		await run(mock);
+
+		const call = mock.helpers.httpRequestWithAuthentication.mock.calls[0];
+		const body = (call[1] as { body: { inputs: { url: string }[] } }).body;
+		expect(body.inputs).toEqual([{ url: "https://linkedin.com/in/alice" }]);
+	});
+
+	it("should throw NodeOperationError when no inputs provided", async () => {
+		const mock = createJobMock([]);
+
+		await expect(run(mock)).rejects.toThrow(NodeOperationError);
+	});
+
 	it("should reject URLs from wrong platform", async () => {
-		const mock = createJobMock("https://instagram.com/user");
+		const mock = createJobMock([{ url: "https://instagram.com/user" }]);
 
 		await expect(run(mock)).rejects.toThrow(NodeOperationError);
 	});
 
 	it("should reject URLs without protocol", async () => {
-		const mock = createJobMock("linkedin.com/in/alice");
+		const mock = createJobMock([{ url: "linkedin.com/in/alice" }]);
 
 		await expect(run(mock)).rejects.toThrow(NodeOperationError);
 	});

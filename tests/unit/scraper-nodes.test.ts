@@ -217,7 +217,7 @@ for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
 			const mock = createMockExecuteFunctions({
 				nodeParameters: {
 					operation: "create",
-					urls: sampleUrl,
+					"inputs.input": [{ url: sampleUrl }],
 					jobName: "",
 					waitForCompletion: false,
 				},
@@ -238,11 +238,14 @@ for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
 			expect(request.body.inputs).toEqual([{ url: sampleUrl }]);
 		});
 
-		it("should parse multi-line URLs", async () => {
+		it("should handle multiple input rows", async () => {
 			const mock = createMockExecuteFunctions({
 				nodeParameters: {
 					operation: "create",
-					urls: `${sampleUrl}\n${sampleUrl}?v=2`,
+					"inputs.input": [
+						{ url: sampleUrl },
+						{ url: `${sampleUrl}?v=2` },
+					],
 					jobName: "",
 					waitForCompletion: false,
 				},
@@ -256,11 +259,11 @@ for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
 			expect(body.inputs).toHaveLength(2);
 		});
 
-		it("should throw on empty URLs", async () => {
+		it("should throw on empty inputs", async () => {
 			const mock = createMockExecuteFunctions({
 				nodeParameters: {
 					operation: "create",
-					urls: "  ",
+					"inputs.input": [],
 					jobName: "",
 					waitForCompletion: false,
 				},
@@ -273,7 +276,7 @@ for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
 			const mock = createMockExecuteFunctions({
 				nodeParameters: {
 					operation: "create",
-					urls: "not-a-url",
+					"inputs.input": [{ url: "not-a-url" }],
 					jobName: "",
 					waitForCompletion: false,
 				},
@@ -289,7 +292,7 @@ for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
 			const mock = createMockExecuteFunctions({
 				nodeParameters: {
 					operation: "create",
-					urls: wrongUrl,
+					"inputs.input": [{ url: wrongUrl }],
 					jobName: "",
 					waitForCompletion: false,
 				},
@@ -303,7 +306,7 @@ for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
 			const mock = createMockExecuteFunctions({
 				nodeParameters: {
 					operation: "create",
-					urls: subdomainUrl,
+					"inputs.input": [{ url: subdomainUrl }],
 					jobName: "",
 					waitForCompletion: false,
 				},
@@ -350,7 +353,7 @@ for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
 			const mock = createMockExecuteFunctions({
 				nodeParameters: {
 					operation: "create",
-					urls: sampleUrl,
+					"inputs.input": [{ url: sampleUrl }],
 					jobName: "",
 					waitForCompletion: true,
 					pollInterval: 1,
