@@ -2,28 +2,63 @@ import type { INodeType } from "n8n-workflow";
 import { NodeOperationError } from "n8n-workflow";
 import { describe, expect, it, vi } from "vitest";
 import { ScraperNodeCrunchbaseCompanies } from "../../nodes/ScraperNodeCrunchbaseCompanies/ScraperNodeCrunchbaseCompanies.node";
+import { ScraperNodeFacebookComments } from "../../nodes/ScraperNodeFacebookComments/ScraperNodeFacebookComments.node";
+import { ScraperNodeFacebookCompanyReviews } from "../../nodes/ScraperNodeFacebookCompanyReviews/ScraperNodeFacebookCompanyReviews.node";
+import { ScraperNodeFacebookEvents } from "../../nodes/ScraperNodeFacebookEvents/ScraperNodeFacebookEvents.node";
 import { ScraperNodeFacebookGroups } from "../../nodes/ScraperNodeFacebookGroups/ScraperNodeFacebookGroups.node";
+import { ScraperNodeFacebookMarketplace } from "../../nodes/ScraperNodeFacebookMarketplace/ScraperNodeFacebookMarketplace.node";
+import { ScraperNodeFacebookPagesAndProfiles } from "../../nodes/ScraperNodeFacebookPagesAndProfiles/ScraperNodeFacebookPagesAndProfiles.node";
+import { ScraperNodeFacebookPersonalProfiles } from "../../nodes/ScraperNodeFacebookPersonalProfiles/ScraperNodeFacebookPersonalProfiles.node";
+import { ScraperNodeFacebookPosts } from "../../nodes/ScraperNodeFacebookPosts/ScraperNodeFacebookPosts.node";
 import { ScraperNodeFacebookProfiles } from "../../nodes/ScraperNodeFacebookProfiles/ScraperNodeFacebookProfiles.node";
+import { ScraperNodeFacebookReels } from "../../nodes/ScraperNodeFacebookReels/ScraperNodeFacebookReels.node";
+import { ScraperNodeG2Reviews } from "../../nodes/ScraperNodeG2Reviews/ScraperNodeG2Reviews.node";
 import { ScraperNodeGitHubRepositories } from "../../nodes/ScraperNodeGitHubRepositories/ScraperNodeGitHubRepositories.node";
 import { ScraperNodeGlassdoorCompanies } from "../../nodes/ScraperNodeGlassdoorCompanies/ScraperNodeGlassdoorCompanies.node";
 import { ScraperNodeGlassdoorJobs } from "../../nodes/ScraperNodeGlassdoorJobs/ScraperNodeGlassdoorJobs.node";
 import { ScraperNodeGlassdoorReviews } from "../../nodes/ScraperNodeGlassdoorReviews/ScraperNodeGlassdoorReviews.node";
+import { ScraperNodeGoogleFlightsSearch } from "../../nodes/ScraperNodeGoogleFlightsSearch/ScraperNodeGoogleFlightsSearch.node";
+import { ScraperNodeGoogleHotelsSearch } from "../../nodes/ScraperNodeGoogleHotelsSearch/ScraperNodeGoogleHotelsSearch.node";
+import { ScraperNodeGoogleMapsListings } from "../../nodes/ScraperNodeGoogleMapsListings/ScraperNodeGoogleMapsListings.node";
+import { ScraperNodeGoogleMapsReviews } from "../../nodes/ScraperNodeGoogleMapsReviews/ScraperNodeGoogleMapsReviews.node";
+import { ScraperNodeGoogleSearchAi } from "../../nodes/ScraperNodeGoogleSearchAi/ScraperNodeGoogleSearchAi.node";
+import { ScraperNodeGoogleSearchResults } from "../../nodes/ScraperNodeGoogleSearchResults/ScraperNodeGoogleSearchResults.node";
+import { ScraperNodeGoogleShoppingProducts } from "../../nodes/ScraperNodeGoogleShoppingProducts/ScraperNodeGoogleShoppingProducts.node";
+import { ScraperNodeGoogleShoppingSearch } from "../../nodes/ScraperNodeGoogleShoppingSearch/ScraperNodeGoogleShoppingSearch.node";
 import { ScraperNodeIndeedCompanies } from "../../nodes/ScraperNodeIndeedCompanies/ScraperNodeIndeedCompanies.node";
 import { ScraperNodeIndeedJobs } from "../../nodes/ScraperNodeIndeedJobs/ScraperNodeIndeedJobs.node";
 import { ScraperNodeInstagramComments } from "../../nodes/ScraperNodeInstagramComments/ScraperNodeInstagramComments.node";
 import { ScraperNodeInstagramPosts } from "../../nodes/ScraperNodeInstagramPosts/ScraperNodeInstagramPosts.node";
 import { ScraperNodeInstagramProfiles } from "../../nodes/ScraperNodeInstagramProfiles/ScraperNodeInstagramProfiles.node";
+import { ScraperNodeInstagramReels } from "../../nodes/ScraperNodeInstagramReels/ScraperNodeInstagramReels.node";
 import { ScraperNodeLinkedInCompanies } from "../../nodes/ScraperNodeLinkedInCompanies/ScraperNodeLinkedInCompanies.node";
+import { ScraperNodeLinkedInJobs } from "../../nodes/ScraperNodeLinkedInJobs/ScraperNodeLinkedInJobs.node";
+import { ScraperNodeLinkedInPeopleSearch } from "../../nodes/ScraperNodeLinkedInPeopleSearch/ScraperNodeLinkedInPeopleSearch.node";
 import { ScraperNodeLinkedInPosts } from "../../nodes/ScraperNodeLinkedInPosts/ScraperNodeLinkedInPosts.node";
 import { ScraperNodeLinkedInProfiles } from "../../nodes/ScraperNodeLinkedInProfiles/ScraperNodeLinkedInProfiles.node";
+import { ScraperNodeMartindaleLawyers } from "../../nodes/ScraperNodeMartindaleLawyers/ScraperNodeMartindaleLawyers.node";
+import { ScraperNodeOwlerCompanies } from "../../nodes/ScraperNodeOwlerCompanies/ScraperNodeOwlerCompanies.node";
+import { ScraperNodePitchBookCompanies } from "../../nodes/ScraperNodePitchBookCompanies/ScraperNodePitchBookCompanies.node";
+import { ScraperNodeTikTokComments } from "../../nodes/ScraperNodeTikTokComments/ScraperNodeTikTokComments.node";
+import { ScraperNodeTikTokPostsByProfile } from "../../nodes/ScraperNodeTikTokPostsByProfile/ScraperNodeTikTokPostsByProfile.node";
+import { ScraperNodeTikTokPostsBySearch } from "../../nodes/ScraperNodeTikTokPostsBySearch/ScraperNodeTikTokPostsBySearch.node";
+import { ScraperNodeTikTokPostsByUrl } from "../../nodes/ScraperNodeTikTokPostsByUrl/ScraperNodeTikTokPostsByUrl.node";
 import { ScraperNodeTikTokProfiles } from "../../nodes/ScraperNodeTikTokProfiles/ScraperNodeTikTokProfiles.node";
+import { ScraperNodeTikTokShop } from "../../nodes/ScraperNodeTikTokShop/ScraperNodeTikTokShop.node";
+import { ScraperNodeTikTokShopCategories } from "../../nodes/ScraperNodeTikTokShopCategories/ScraperNodeTikTokShopCategories.node";
 import { ScraperNodeTikTokVideos } from "../../nodes/ScraperNodeTikTokVideos/ScraperNodeTikTokVideos.node";
+import { ScraperNodeTrustRadiusReviews } from "../../nodes/ScraperNodeTrustRadiusReviews/ScraperNodeTrustRadiusReviews.node";
+import { ScraperNodeTrustpilotReviews } from "../../nodes/ScraperNodeTrustpilotReviews/ScraperNodeTrustpilotReviews.node";
 import { ScraperNodeTwitterPosts } from "../../nodes/ScraperNodeTwitterPosts/ScraperNodeTwitterPosts.node";
 import { ScraperNodeTwitterProfiles } from "../../nodes/ScraperNodeTwitterProfiles/ScraperNodeTwitterProfiles.node";
+import { ScraperNodeVentureRadarCompanies } from "../../nodes/ScraperNodeVentureRadarCompanies/ScraperNodeVentureRadarCompanies.node";
+import { ScraperNodeXingProfiles } from "../../nodes/ScraperNodeXingProfiles/ScraperNodeXingProfiles.node";
 import { ScraperNodeYelpBusinesses } from "../../nodes/ScraperNodeYelpBusinesses/ScraperNodeYelpBusinesses.node";
 import { ScraperNodeYelpReviews } from "../../nodes/ScraperNodeYelpReviews/ScraperNodeYelpReviews.node";
 import { ScraperNodeYouTubeChannels } from "../../nodes/ScraperNodeYouTubeChannels/ScraperNodeYouTubeChannels.node";
 import { ScraperNodeYouTubeComments } from "../../nodes/ScraperNodeYouTubeComments/ScraperNodeYouTubeComments.node";
+import { ScraperNodeYouTubeVideos } from "../../nodes/ScraperNodeYouTubeVideos/ScraperNodeYouTubeVideos.node";
+import { ScraperNodeZoomInfoCompanies } from "../../nodes/ScraperNodeZoomInfoCompanies/ScraperNodeZoomInfoCompanies.node";
 import {
 	mockCreateJobResponse,
 	mockJobCompleted,
@@ -48,6 +83,7 @@ interface ScraperTestCase {
 	NodeClass: new () => INodeType;
 	scraperId: string;
 	sampleUrl: string;
+	inputField?: "url" | "keyword";
 }
 
 const SCRAPERS: ScraperTestCase[] = [
@@ -190,9 +226,224 @@ const SCRAPERS: ScraperTestCase[] = [
 		scraperId: "crunchbase-companies",
 		sampleUrl: "https://crunchbase.com/organization/acme-corp",
 	},
+	// 8 existing nodes missing from test coverage
+	{
+		name: "ScraperNodeLinkedInJobs",
+		NodeClass: ScraperNodeLinkedInJobs,
+		scraperId: "linkedin-jobs",
+		sampleUrl: "https://linkedin.com/jobs/view/1234567890",
+	},
+	{
+		name: "ScraperNodeLinkedInPeopleSearch",
+		NodeClass: ScraperNodeLinkedInPeopleSearch,
+		scraperId: "linkedin-people-search",
+		sampleUrl: "https://linkedin.com/search/results/people/",
+	},
+	{
+		name: "ScraperNodeInstagramReels",
+		NodeClass: ScraperNodeInstagramReels,
+		scraperId: "instagram-reels",
+		sampleUrl: "https://instagram.com/reel/ABC123",
+	},
+	{
+		name: "ScraperNodeTikTokComments",
+		NodeClass: ScraperNodeTikTokComments,
+		scraperId: "tiktok-comments",
+		sampleUrl: "https://tiktok.com/@user/video/123456",
+	},
+	{
+		name: "ScraperNodeYouTubeVideos",
+		NodeClass: ScraperNodeYouTubeVideos,
+		scraperId: "youtube-videos",
+		sampleUrl: "https://youtube.com/watch?v=abc123",
+	},
+	{
+		name: "ScraperNodeFacebookComments",
+		NodeClass: ScraperNodeFacebookComments,
+		scraperId: "facebook-comments",
+		sampleUrl: "https://facebook.com/username",
+	},
+	{
+		name: "ScraperNodeFacebookPosts",
+		NodeClass: ScraperNodeFacebookPosts,
+		scraperId: "facebook-posts",
+		sampleUrl: "https://facebook.com/username",
+	},
+	{
+		name: "ScraperNodeFacebookReels",
+		NodeClass: ScraperNodeFacebookReels,
+		scraperId: "facebook-reels",
+		sampleUrl: "https://facebook.com/username",
+	},
+	// 27 new nodes
+	{
+		name: "ScraperNodeTikTokPostsByUrl",
+		NodeClass: ScraperNodeTikTokPostsByUrl,
+		scraperId: "tiktok-posts-by-url",
+		sampleUrl: "https://tiktok.com/@user/video/1234567890",
+	},
+	{
+		name: "ScraperNodeTikTokPostsByProfile",
+		NodeClass: ScraperNodeTikTokPostsByProfile,
+		scraperId: "tiktok-posts-by-profile",
+		sampleUrl: "https://tiktok.com/@username",
+	},
+	{
+		name: "ScraperNodeTikTokPostsBySearch",
+		NodeClass: ScraperNodeTikTokPostsBySearch,
+		scraperId: "tiktok-posts-by-search",
+		sampleUrl: "https://tiktok.com/search?q=keyword",
+	},
+	{
+		name: "ScraperNodeTikTokShop",
+		NodeClass: ScraperNodeTikTokShop,
+		scraperId: "tiktok-shop",
+		sampleUrl: "https://tiktok.com/shop/product/123456",
+	},
+	{
+		name: "ScraperNodeTikTokShopCategories",
+		NodeClass: ScraperNodeTikTokShopCategories,
+		scraperId: "tiktok-shop-categories",
+		sampleUrl: "https://tiktok.com/shop/category/123456",
+	},
+	{
+		name: "ScraperNodeFacebookPagesAndProfiles",
+		NodeClass: ScraperNodeFacebookPagesAndProfiles,
+		scraperId: "facebook-pages-and-profiles",
+		sampleUrl: "https://facebook.com/pagename",
+	},
+	{
+		name: "ScraperNodeFacebookPersonalProfiles",
+		NodeClass: ScraperNodeFacebookPersonalProfiles,
+		scraperId: "facebook-personal-profiles",
+		sampleUrl: "https://facebook.com/username",
+	},
+	{
+		name: "ScraperNodeFacebookMarketplace",
+		NodeClass: ScraperNodeFacebookMarketplace,
+		scraperId: "facebook-marketplace",
+		sampleUrl: "https://facebook.com/marketplace/item/123456",
+	},
+	{
+		name: "ScraperNodeFacebookEvents",
+		NodeClass: ScraperNodeFacebookEvents,
+		scraperId: "facebook-events",
+		sampleUrl: "https://facebook.com/events/123456789",
+	},
+	{
+		name: "ScraperNodeFacebookCompanyReviews",
+		NodeClass: ScraperNodeFacebookCompanyReviews,
+		scraperId: "facebook-company-reviews",
+		sampleUrl: "https://facebook.com/company-page",
+	},
+	{
+		name: "ScraperNodeGoogleMapsListings",
+		NodeClass: ScraperNodeGoogleMapsListings,
+		scraperId: "google-maps-listings",
+		sampleUrl: "https://google.com/maps/place/acme-corp",
+	},
+	{
+		name: "ScraperNodeGoogleMapsReviews",
+		NodeClass: ScraperNodeGoogleMapsReviews,
+		scraperId: "google-maps-reviews",
+		sampleUrl: "https://google.com/maps/place/acme-corp",
+	},
+	{
+		name: "ScraperNodeGoogleSearchResults",
+		NodeClass: ScraperNodeGoogleSearchResults,
+		scraperId: "google-search-results",
+		sampleUrl: "best CRM software for startups",
+		inputField: "keyword",
+	},
+	{
+		name: "ScraperNodeGoogleSearchAi",
+		NodeClass: ScraperNodeGoogleSearchAi,
+		scraperId: "google-search-ai",
+		sampleUrl: "what is the best project management tool",
+		inputField: "keyword",
+	},
+	{
+		name: "ScraperNodeGoogleShoppingProducts",
+		NodeClass: ScraperNodeGoogleShoppingProducts,
+		scraperId: "google-shopping-products",
+		sampleUrl: "https://google.com/shopping/product/123456",
+	},
+	{
+		name: "ScraperNodeGoogleShoppingSearch",
+		NodeClass: ScraperNodeGoogleShoppingSearch,
+		scraperId: "google-shopping-search",
+		sampleUrl: "standing desk adjustable",
+		inputField: "keyword",
+	},
+	{
+		name: "ScraperNodeGoogleFlightsSearch",
+		NodeClass: ScraperNodeGoogleFlightsSearch,
+		scraperId: "google-flights-search",
+		sampleUrl: "https://google.com/travel/flights/search?tfs=abc123",
+	},
+	{
+		name: "ScraperNodeGoogleHotelsSearch",
+		NodeClass: ScraperNodeGoogleHotelsSearch,
+		scraperId: "google-hotels-search",
+		sampleUrl: "https://google.com/travel/hotels/search",
+	},
+	{
+		name: "ScraperNodeZoomInfoCompanies",
+		NodeClass: ScraperNodeZoomInfoCompanies,
+		scraperId: "zoominfo-companies",
+		sampleUrl: "https://zoominfo.com/c/acme-corp/123456789",
+	},
+	{
+		name: "ScraperNodeTrustpilotReviews",
+		NodeClass: ScraperNodeTrustpilotReviews,
+		scraperId: "trustpilot-reviews",
+		sampleUrl: "https://trustpilot.com/review/acme.com",
+	},
+	{
+		name: "ScraperNodeG2Reviews",
+		NodeClass: ScraperNodeG2Reviews,
+		scraperId: "g2-reviews",
+		sampleUrl: "https://g2.com/products/acme-crm/reviews",
+	},
+	{
+		name: "ScraperNodePitchBookCompanies",
+		NodeClass: ScraperNodePitchBookCompanies,
+		scraperId: "pitchbook-companies",
+		sampleUrl: "https://pitchbook.com/profiles/company/12345-67",
+	},
+	{
+		name: "ScraperNodeXingProfiles",
+		NodeClass: ScraperNodeXingProfiles,
+		scraperId: "xing-profiles",
+		sampleUrl: "https://xing.com/profile/john_doe",
+	},
+	{
+		name: "ScraperNodeOwlerCompanies",
+		NodeClass: ScraperNodeOwlerCompanies,
+		scraperId: "owler-companies",
+		sampleUrl: "https://owler.com/company/acme-corp",
+	},
+	{
+		name: "ScraperNodeMartindaleLawyers",
+		NodeClass: ScraperNodeMartindaleLawyers,
+		scraperId: "martindale-lawyers",
+		sampleUrl: "https://martindale.com/attorney/john-doe-12345",
+	},
+	{
+		name: "ScraperNodeVentureRadarCompanies",
+		NodeClass: ScraperNodeVentureRadarCompanies,
+		scraperId: "ventureradar-companies",
+		sampleUrl: "https://ventureradar.com/company/acme-corp/123456",
+	},
+	{
+		name: "ScraperNodeTrustRadiusReviews",
+		NodeClass: ScraperNodeTrustRadiusReviews,
+		scraperId: "trustradius-reviews",
+		sampleUrl: "https://trustradius.com/products/acme-crm/reviews",
+	},
 ];
 
-for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
+for (const { name, NodeClass, scraperId, sampleUrl, inputField = "url" } of SCRAPERS) {
 	describe(name, () => {
 		const node = new NodeClass();
 
@@ -217,7 +468,7 @@ for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
 			const mock = createMockExecuteFunctions({
 				nodeParameters: {
 					operation: "create",
-					"inputs.input": [{ url: sampleUrl }],
+					"inputs.input": [{ [inputField]: sampleUrl }],
 					jobName: "",
 					waitForCompletion: false,
 				},
@@ -230,12 +481,12 @@ for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
 			const request = call[1] as {
 				method: string;
 				url: string;
-				body: { scraperId: string; inputs: { url: string }[] };
+				body: { scraperId: string; inputs: Record<string, string>[] };
 			};
 			expect(request.method).toBe("POST");
 			expect(request.url).toContain("/api/jobs/create");
 			expect(request.body.scraperId).toBe(scraperId);
-			expect(request.body.inputs).toEqual([{ url: sampleUrl }]);
+			expect(request.body.inputs).toEqual([{ [inputField]: sampleUrl }]);
 		});
 
 		it("should handle multiple input rows", async () => {
@@ -243,8 +494,8 @@ for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
 				nodeParameters: {
 					operation: "create",
 					"inputs.input": [
-						{ url: sampleUrl },
-						{ url: `${sampleUrl}?v=2` },
+						{ [inputField]: sampleUrl },
+						{ [inputField]: `${sampleUrl}?v=2` },
 					],
 					jobName: "",
 					waitForCompletion: false,
@@ -272,50 +523,52 @@ for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
 			await expect(exec(node, mock)).rejects.toThrow(NodeOperationError);
 		});
 
-		it("should reject URLs without http(s) protocol", async () => {
-			const mock = createMockExecuteFunctions({
-				nodeParameters: {
-					operation: "create",
-					"inputs.input": [{ url: "not-a-url" }],
-					jobName: "",
-					waitForCompletion: false,
-				},
+		if (inputField !== "keyword") {
+			it("should reject URLs without http(s) protocol", async () => {
+				const mock = createMockExecuteFunctions({
+					nodeParameters: {
+						operation: "create",
+						"inputs.input": [{ url: "not-a-url" }],
+						jobName: "",
+						waitForCompletion: false,
+					},
+				});
+
+				await expect(exec(node, mock)).rejects.toThrow(/must start with http/);
 			});
 
-			await expect(exec(node, mock)).rejects.toThrow(/must start with http/);
-		});
+			it("should reject URLs from the wrong platform", async () => {
+				const wrongUrl = name.includes("LinkedIn")
+					? "https://instagram.com/wrong"
+					: "https://linkedin.com/in/wrong";
+				const mock = createMockExecuteFunctions({
+					nodeParameters: {
+						operation: "create",
+						"inputs.input": [{ url: wrongUrl }],
+						jobName: "",
+						waitForCompletion: false,
+					},
+				});
 
-		it("should reject URLs from the wrong platform", async () => {
-			const wrongUrl = name.includes("LinkedIn")
-				? "https://instagram.com/wrong"
-				: "https://linkedin.com/in/wrong";
-			const mock = createMockExecuteFunctions({
-				nodeParameters: {
-					operation: "create",
-					"inputs.input": [{ url: wrongUrl }],
-					jobName: "",
-					waitForCompletion: false,
-				},
+				await expect(exec(node, mock)).rejects.toThrow(/Wrong platform/);
 			});
 
-			await expect(exec(node, mock)).rejects.toThrow(/Wrong platform/);
-		});
+			it("should accept subdomain URLs for the platform", async () => {
+				const subdomainUrl = sampleUrl.replace("://", "://www.");
+				const mock = createMockExecuteFunctions({
+					nodeParameters: {
+						operation: "create",
+						"inputs.input": [{ [inputField]: subdomainUrl }],
+						jobName: "",
+						waitForCompletion: false,
+					},
+					httpHandler: () => mockCreateJobResponse,
+				});
 
-		it("should accept subdomain URLs for the platform", async () => {
-			const subdomainUrl = sampleUrl.replace("://", "://www.");
-			const mock = createMockExecuteFunctions({
-				nodeParameters: {
-					operation: "create",
-					"inputs.input": [{ url: subdomainUrl }],
-					jobName: "",
-					waitForCompletion: false,
-				},
-				httpHandler: () => mockCreateJobResponse,
+				const result = await exec(node, mock);
+				expect(result[0][0].json).toHaveProperty("jobId");
 			});
-
-			const result = await exec(node, mock);
-			expect(result[0][0].json).toHaveProperty("jobId");
-		});
+		}
 
 		it("should get job by ID", async () => {
 			const mockJob = { job: { _id: "j1", status: "completed" } };
@@ -353,7 +606,7 @@ for (const { name, NodeClass, scraperId, sampleUrl } of SCRAPERS) {
 			const mock = createMockExecuteFunctions({
 				nodeParameters: {
 					operation: "create",
-					"inputs.input": [{ url: sampleUrl }],
+					"inputs.input": [{ [inputField]: sampleUrl }],
 					jobName: "",
 					waitForCompletion: true,
 					pollInterval: 1,
