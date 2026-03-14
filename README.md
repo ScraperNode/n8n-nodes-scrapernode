@@ -5,7 +5,7 @@
 
 [n8n](https://n8n.io/) community nodes for [**ScraperNode**](https://scrapernode.com) — extract structured data from LinkedIn, Instagram, TikTok, Twitter/X, YouTube, Facebook, Indeed, Glassdoor, Yelp, GitHub, and Crunchbase directly inside your n8n workflows.
 
-> **31 scraper nodes** | **11 platforms** | **AI Agent compatible** | **Pay-per-scrape credits**
+> **58 scraper nodes** | **25 platforms** | **AI Agent compatible** | **Pay-per-scrape credits**
 
 [Website](https://scrapernode.com) | [API Docs](https://scrapernode.com/docs/api) | [Get API Key](https://scrapernode.com/settings) | [npm](https://www.npmjs.com/package/n8n-nodes-scrapernode) | [Report Issues](https://github.com/ScraperNode/n8n-nodes-scrapernode/issues)
 
@@ -141,6 +141,113 @@ You need a ScraperNode API key to use these nodes.
 |------|-------------|--------|------|
 | [**Companies**](https://scrapernode.com/crunchbase/scrapers/companies) | Extract company data — funding rounds, investors, growth metrics | 53 | 2 credits/row |
 
+### TikTok (Extended) — [scrapernode.com/tiktok](https://scrapernode.com/tiktok)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Posts by URL**](https://scrapernode.com/tiktok/scrapers/posts-by-url) | Extract post data by direct video URL using Fast API | 1 credit/row |
+| [**Posts by Profile**](https://scrapernode.com/tiktok/scrapers/posts-by-profile) | Extract all posts from a TikTok profile URL using Fast API | 1 credit/row |
+| [**Posts by Search**](https://scrapernode.com/tiktok/scrapers/posts-by-search) | Collect posts matching a search query using Fast API | 1 credit/row |
+| [**Shop Products**](https://scrapernode.com/tiktok/scrapers/shop) | Extract TikTok Shop product data including pricing and seller info | 1 credit/row |
+| [**Shop Categories**](https://scrapernode.com/tiktok/scrapers/shop-categories) | Extract TikTok Shop products by category with pricing and ratings | 1 credit/row |
+
+### Facebook (Extended) — [scrapernode.com/facebook](https://scrapernode.com/facebook)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Pages & Profiles**](https://scrapernode.com/facebook/scrapers/pages-and-profiles) | Extract page/profile data including categories, contact info, hours, and ratings | 1 credit/row |
+| [**Personal Profiles**](https://scrapernode.com/facebook/scrapers/personal-profiles) | Extract personal profile data including work, education, and photos | 1 credit/row |
+| [**Marketplace**](https://scrapernode.com/facebook/scrapers/marketplace) | Extract Marketplace listings with pricing, seller info, and item details | 1 credit/row |
+| [**Events**](https://scrapernode.com/facebook/scrapers/events) | Extract event data including date, location, attendees, and host details | 1 credit/row |
+| [**Company Reviews**](https://scrapernode.com/facebook/scrapers/company-reviews) | Extract company page reviews with ratings and reviewer details | 1 credit/row |
+
+### Google Maps — [scrapernode.com/google-maps](https://scrapernode.com/google-maps)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Listings**](https://scrapernode.com/google-maps/scrapers/listings) | Extract business listings with contact info, hours, ratings, and reviews | 1 credit/row |
+| [**Reviews**](https://scrapernode.com/google-maps/scrapers/reviews) | Extract customer reviews from Google Maps business listings | 1 credit/row |
+
+### Google Search — [scrapernode.com/google-search](https://scrapernode.com/google-search)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Search Results**](https://scrapernode.com/google-search/scrapers/results) | Extract up to 100 organic search results from Google SERP by keyword | 1 credit/row |
+| [**AI Search**](https://scrapernode.com/google-search/scrapers/ai) | Extract AI-generated search results and citations from Google AI Mode by keyword | 1 credit/row |
+
+### Google Shopping — [scrapernode.com/google-shopping](https://scrapernode.com/google-shopping)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Products**](https://scrapernode.com/google-shopping/scrapers/products) | Extract product listings from Google Shopping with prices and merchant info | 1 credit/row |
+| [**Shopping Search**](https://scrapernode.com/google-shopping/scrapers/search) | Extract Google Shopping search results by keyword with pricing details | 1 credit/row |
+
+### Google Flights — [scrapernode.com/google-flights](https://scrapernode.com/google-flights)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Flights Search**](https://scrapernode.com/google-flights/scrapers/search) | Extract flight search results and pricing from Google Flights | 1 credit/row |
+
+### Google Hotels — [scrapernode.com/google-hotels](https://scrapernode.com/google-hotels)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Hotels Search**](https://scrapernode.com/google-hotels/scrapers/search) | Collect hotel listings, pricing, and reviews from Google Hotels | 1 credit/row |
+
+### ZoomInfo — [scrapernode.com/zoominfo](https://scrapernode.com/zoominfo)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Companies**](https://scrapernode.com/zoominfo/scrapers/companies) | Extract company data including size, revenue, contacts, and tech stack | 2 credits/row |
+
+### Trustpilot — [scrapernode.com/trustpilot](https://scrapernode.com/trustpilot)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Reviews**](https://scrapernode.com/trustpilot/scrapers/reviews) | Extract business reviews with ratings, reviewer details, and response data | 1 credit/row |
+
+### G2 — [scrapernode.com/g2](https://scrapernode.com/g2)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Reviews**](https://scrapernode.com/g2/scrapers/reviews) | Extract software product reviews with ratings, pros/cons, and reviewer details | 1 credit/row |
+
+### PitchBook — [scrapernode.com/pitchbook](https://scrapernode.com/pitchbook)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Companies**](https://scrapernode.com/pitchbook/scrapers/companies) | Extract company funding, investors, valuations, and financial data | 2 credits/row |
+
+### Xing — [scrapernode.com/xing](https://scrapernode.com/xing)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Profiles**](https://scrapernode.com/xing/scrapers/profiles) | Extract professional profiles from Xing, the European LinkedIn alternative | 1 credit/row |
+
+### Owler — [scrapernode.com/owler](https://scrapernode.com/owler)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Companies**](https://scrapernode.com/owler/scrapers/companies) | Extract company intelligence including revenue estimates, competitors, and news | 1 credit/row |
+
+### Martindale — [scrapernode.com/martindale](https://scrapernode.com/martindale)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Lawyers**](https://scrapernode.com/martindale/scrapers/lawyers) | Extract US attorney and law firm data from the Martindale-Hubbell directory | 1 credit/row |
+
+### VentureRadar — [scrapernode.com/ventureradar](https://scrapernode.com/ventureradar)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Companies**](https://scrapernode.com/ventureradar/scrapers/companies) | Extract startup and emerging company data from VentureRadar | 1 credit/row |
+
+### TrustRadius — [scrapernode.com/trustradius](https://scrapernode.com/trustradius)
+
+| Node | Description | Cost |
+|------|-------------|------|
+| [**Reviews**](https://scrapernode.com/trustradius/scrapers/reviews) | Extract verified software product reviews with detailed ratings | 1 credit/row |
+
 ---
 
 ## Job Management
@@ -187,7 +294,7 @@ All nodes are **AI Agent compatible** with `usableAsTool` enabled. Connect them 
 
 ## Features
 
-- **31 dedicated scraper nodes** — one per scraper, each with tailored inputs and platform-specific icons
+- **58 dedicated scraper nodes** — one per scraper, each with tailored inputs and platform-specific icons
 - **AI Agent compatible** — focused tool descriptions for accurate tool selection by AI agents
 - **Per-platform icons** — each scraper node displays its platform icon for easy identification on the canvas
 - **Return All toggle** — standard n8n pagination for Get Results and List operations
@@ -219,4 +326,4 @@ All nodes are **AI Agent compatible** with `usableAsTool` enabled. Connect them 
 
 ### Tags
 
-`n8n` `n8n-community-node` `n8n-community-node-package` `web-scraping` `scraping` `data-extraction` `lead-generation` `linkedin-scraper` `instagram-scraper` `tiktok-scraper` `twitter-scraper` `x-scraper` `youtube-scraper` `facebook-scraper` `indeed-scraper` `glassdoor-scraper` `yelp-scraper` `github-scraper` `crunchbase-scraper` `social-media-scraping` `social-media` `automation` `workflow` `api` `scrapernode` `linkedin` `instagram` `tiktok` `twitter` `youtube` `facebook` `indeed` `glassdoor` `yelp` `crunchbase` `influencer-marketing` `competitor-analysis` `market-research` `talent-sourcing` `job-scraping` `review-scraping` `profile-scraping` `ai-agent` `n8n-ai-agent`
+`n8n` `n8n-community-node` `n8n-community-node-package` `web-scraping` `scraping` `data-extraction` `lead-generation` `linkedin-scraper` `instagram-scraper` `tiktok-scraper` `twitter-scraper` `x-scraper` `youtube-scraper` `facebook-scraper` `indeed-scraper` `glassdoor-scraper` `yelp-scraper` `github-scraper` `crunchbase-scraper` `google-maps-scraper` `google-search-scraper` `google-shopping-scraper` `zoominfo-scraper` `trustpilot-scraper` `g2-scraper` `pitchbook-scraper` `xing-scraper` `social-media-scraping` `social-media` `automation` `workflow` `api` `scrapernode` `linkedin` `instagram` `tiktok` `twitter` `youtube` `facebook` `indeed` `glassdoor` `yelp` `crunchbase` `influencer-marketing` `competitor-analysis` `market-research` `talent-sourcing` `job-scraping` `review-scraping` `profile-scraping` `ai-agent` `n8n-ai-agent`
